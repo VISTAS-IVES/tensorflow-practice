@@ -8,4 +8,5 @@ Created on Tue Jan 10 12:03:28 2017
 
 # Using an example from Lubanovic, Introducing Python, p. 313
 def just_do_it(text):
-    return text.capitalize()
+    from string import capwords
+    return capwords(text)

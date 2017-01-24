@@ -14,5 +14,8 @@ class TestAverage(unittest.TestCase):
     def test_average(self):
         self.assertAlmostEqual(angular_average(np.array([170, 190])), 180)
 
+    def test_wraparound(self):
+        self.assertAlmostEqual(angular_average(np.array([10, 350])), 0)
+
 if __name__ == '__main__':
     unittest.main()

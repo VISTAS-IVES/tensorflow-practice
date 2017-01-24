@@ -17,8 +17,13 @@ data, labels = classifier.get('primet_directions', policy=(LABELLED | RAW), max_
 
 def angular_average(a):
     """
-        Returna an angle, in degrees, that is the average of the angles in a.
+        Return an angle, in degrees, that is the average of the angles in a.
         Note that angular_interpolate([170, 190]) returns 180, but
         angular_interpolate([10, 350]) returns 0.
     """
-    return np.sum(a) / a.size
+    r = np.sum(a) / a.size
+#    too_far = sum(abs(r - i) > 90 for i in a) / a.size
+    too_far = np.sum(abs(r - a) > 90) / a.size
+    if too_far > 0.5: # Most values are on wrong side of circle
+        r = max(r - 180, 180 - r)
+    return r

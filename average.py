@@ -24,3 +24,10 @@ def angular_average(a):
     x = np.mean(np.cos(r))
     y = np.mean(np.sin(r))
     return (math.degrees(math.atan2(y, x)) + 360) % 360   
+
+def masked_angular_average(a):
+    """
+        Like angular_average, but masks out any values of -1.
+    """
+    masked = np.ma.masked_array(a, np.equal(a, -1))
+    return angular_average(masked)
